@@ -1,0 +1,48 @@
+@keyframes logo-slider-animation {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-slider {
+  --speed: 10s;
+  --base-height: 3rem;
+  --scale-factor-horizontal: 0.1;
+  --gap: 4.8rem;
+
+  overflow: clip;
+}
+
+.logo-slider__track {
+  display: flex;
+  padding-left: var(--gap);
+  gap: var(--gap);
+  width: max-content;
+  animation: logo-slider-animation var(--speed, 10s) linear infinite
+    var(--direction, forwards);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo-slider__item {
+  --base-ratio: calc(var(--width) / var(--height));
+  aspect-ratio: var(--base-ratio);
+
+  --factor-horizontal: min(
+    var(--scale-factor-horizontal) * -1 * var(--base-ratio) +
+      var(--scale-factor-horizontal) + 1,
+    1
+  );
+  height: max(
+    var(--base-height) / 2,
+    var(--base-height) * var(--factor-horizontal)
+  );
+
+  & img {
+    width: 100%;
+    height: auto;
+  }
+}
